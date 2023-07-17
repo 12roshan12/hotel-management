@@ -1,0 +1,69 @@
+<div class="w-full h-full p-10 flex flex-col bg-black/5 gap-8">
+    <div class="w-full bg-white p-2 px-6 flex justify-between items-center">
+        <div class="flex flex-row gap-x-4 items-baseline">
+            <div>
+                <img src="assets/images/profile.png" class="w-10 h-10" />
+            </div>
+            <div>
+                <img src="assets/images/patient.svg" class="w-6 h-6" />
+            </div>
+            <div>
+                Sammie
+            </div>
+        </div>
+
+        <div>
+            <img src="assets/images/logo.png" class="w-30 h-10" />
+        </div>
+
+        <div class="flex flex-row gap-x-2 cursor-pointer">
+            <mat-icon>backspace</mat-icon><span>Logout</span> 
+        </div>
+    </div>
+
+    <div class="w-full flex flex-row gap-x-8">
+        <div class="h-[75vh] bg-white w-[20vw]">
+            <div class="w-full h-10 bg-[#008592] flex flex-row items-center text-white text-lg">
+                <mat-icon>apps</mat-icon>
+                <span>
+                    Menu
+                </span>
+            </div>
+            <div class="flex flex-col gap-4 py-6"> 
+                <div class="flex flex-row px-10 justify-between items-center cursor-pointer">
+                    <div>Ico</div>
+                    <div class="font-bold">Boards</div>
+                    <div class="w-4 h-4 bg-[#3EB489] rounded-full"></div>
+                </div>
+
+                <div class="flex flex-row px-10 justify-between items-center cursor-pointer">
+                    <div>Ico</div>
+                    <div class="font-bold">Settings</div>
+                    <div class="w-4 h-4 bg-gray-100 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="h-[75vh] w-full grid grid-cols-2 gap-8 p-16">
+            <div routerLink="account-management"
+                class="w-full h-full cursor-pointer rounded-xl bg-[#3EB489] text-2xl text-white flex items-center justify-center">
+                Account Management
+            </div>
+
+            <div  routerLink="report-management"
+                class="w-full h-full cursor-pointer rounded-xl bg-[#3EB489] text-2xl text-white flex items-center justify-center">
+                Report Management
+            </div>
+
+            <div routerLink="treatment-management"
+                class="w-full h-full cursor-pointer rounded-xl bg-[#3EB489] text-2xl text-white flex items-center justify-center">
+                Treatment Management
+            </div>
+
+            <div routerLink="schedule-management"
+                class="w-full h-full cursor-pointer rounded-xl bg-[#3EB489] text-2xl text-white flex items-center justify-center">
+                Schedule Management
+            </div>
+        </div>
+    </div>
+</div>
