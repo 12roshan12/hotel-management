@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex flex-row gap-x-2 cursor-pointer">
-            <mat-icon>backspace</mat-icon><span>Back</span> 
+            <mat-icon>backspace</mat-icon><span>Back</span>
         </div>
     </div>
 
@@ -25,26 +25,31 @@
         <div class="h-12 w-full flex items-center justify-center text-2xl text-white bg-[#008592]">
             Account Management
         </div>
-            <div class="h-[65vh] w-full grid grid-cols-2 gap-8 p-16 bg-[#3EB489]">
-                <div routerLink="add"
-                    class="w-full h-full cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
-                    Add New User
-                </div>
-    
-                <div  routerLink="delete"
-                    class="w-full h-full cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
-                    Delete Existing User
-                </div>
-    
-                <div routerLink="edit"
-                    class="w-full h-full cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
-                    Edit/Modify User
-                </div>
-    
-                <div routerLink="assign-roles"
-                    class="w-full h-full cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
-                    Assign Roles
-                </div>
+        <div class="min-h-[65vh] w-full grid grid-cols-2 gap-8 p-16 bg-[#3EB489]">
+            <div routerLink="add"
+                class="w-full min-h-[15vh] cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
+                Add New User
+            </div>
+
+            <div routerLink="delete"
+                class="w-full min-h-[15vh] cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
+                Delete Existing User
+            </div>
+
+            <div routerLink="edit"
+                class="w-full min-h-[15vh] cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
+                Edit/Modify User
+            </div>
+
+            <div routerLink="assign-roles"
+                class="w-full min-h-[15vh] cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
+                Assign Roles
+            </div>
+
+            <div routerLink="user-list"
+                class="w-full min-h-[15vh] cursor-pointer rounded-xl bg-white text-2xl text-[#3EB489] flex items-center justify-center">
+                User List
+            </div>
         </div>
     </div>
 

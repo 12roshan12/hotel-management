@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-report-management',
-  templateUrl: './report-management.component.html',
-  styleUrls: ['./report-management.component.scss']
+  selector: 'app-preview-message',
+  templateUrl: './preview-message.component.html',
+  styleUrls: ['./preview-message.component.scss']
 })
-export class ReportManagementComponent implements OnInit {
+export class PreviewMessageComponent implements OnInit {
+  
   collection: any[] = []
   p = 1
   composeMessage = false
   dataSubmitted = false
-  PreviewMessage = false
   ngOnInit(): void {
 
     for (let i = 1; i <= 100; i++) {

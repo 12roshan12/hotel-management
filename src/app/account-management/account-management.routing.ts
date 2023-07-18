@@ -5,6 +5,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { AssignRolesComponent } from './assign-roles/assign-roles.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'assign-role', component: AssignRolesComponent
+  },
+  {
+    path: 'user-list', component: UserListComponent
   }
 ];
 

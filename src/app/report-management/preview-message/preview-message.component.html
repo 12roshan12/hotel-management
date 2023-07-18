@@ -44,7 +44,7 @@
 
         <div class="  w-full flex items-center justify-center ">
             <div class="bg-transparent h-full w-full px-16 ">
-                <div *ngIf="!composeMessage && !PreviewMessage" class="bg-white py-4 px-8">
+                <div *ngIf="!composeMessage" class="bg-white py-4 px-8">
                     <div class="w-full p-2 border border-black/20 rounded flex flex-row gap-x-2">
                         <div class="w-full">
                             <input type="text" class="w-full"
@@ -143,7 +143,7 @@
 
                 </div>
 
-                <div *ngIf="composeMessage && !PreviewMessage" class=" min-h-[60vh] w-full flex items-center justify-center">
+                <div *ngIf="composeMessage" class=" min-h-[60vh] w-full flex items-center justify-center">
                     <div class="bg-white min-h-[50vh] w-[40vw] ">
                         <div *ngIf="!dataSubmitted ">
                             <div class="p-8 flex flex-col gap-y-2 w-full">
@@ -205,52 +205,15 @@
                         <div *ngIf="dataSubmitted" class="flex justify-center items-center w-full h-full">
                             <div class="flex flex-row gap-x-6 p-2 bg-[#95EEC4]/60 items-center">
                                 <span><img src="assets/images/info.svg"></span>
-                                <span>Sent Succesfully</span>
+                                <span>User have been Added Successfully </span>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <div *ngIf="PreviewMessage && !composeMessage" class=" min-h-[60vh] w-full flex items-center justify-center">
-                    <div class="bg-white min-h-[50vh] w-[40vw] rounded-lg">
-                        <div *ngIf="!dataSubmitted " class="p-8">
-                            <div class=" flex flex-row justify-end gap-2 w-full border-b border-b-gray-200 py-2">
-                                <span>
-                                    <img src="assets/images/mail1.png" class="h-6" />
-                                </span>
-                                <span>
-                                    <img src="assets/images/mail2.png" class="h-6" />
-                                </span>
-                            </div>
-                            <div class="text-lg pt-4">
-                                Board Meeting Minutes
-                            </div>
-                            <div class="pt-4">
-                                <span class="flex flex-row items-center justify-start gap-x-2">
-                                    <span><img src="assets/images/profile.png" class="w-8 h-8" /> </span>
-                                    <span class="flex flex-col">
-                                        <span class="flex flex-row items-center gap-1">
-                                            <span>Birendra</span>
-                                            <span class="text-xs text-gray-500">< Birendra1@gmail.com ></span>
-                                        </span>
-                                        <span class="text-xs text-gray-500">to me , pat</span>
-                                    </span>
-                               
-                                </span>
-                            </div>
-                            <div class="pt-4">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis obcaecati ipsum optio hic ut reiciendis provident dolorum, blanditiis cum nemo, ad dolores alias qui placeat! Soluta perspiciatis voluptates error doloribus.
-                            </div>
-                            <div class="pt-4 flex flex-row justify-center gap-x-4">
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Reply</button>
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Reply All</button>
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Forward</button>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
+
             </div>
 
         </div>

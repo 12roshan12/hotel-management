@@ -8,7 +8,7 @@ const routes: Routes = [
         path: '', component: LandingComponent,
         children: [
             {
-                path: 'treatment-management', loadChildren: () => import('../schedule-management/schedule-management.module').then(m => m.ScheduleManagementModule),
+                path: 'treatment-management', loadChildren: () => import('../treatment-management/treatment-management.module').then(m => m.TreatmentManagementModule),
             },
             {
                 path: 'schedule-management', loadChildren: () => import('../schedule-management/schedule-management.module').then(m => m.ScheduleManagementModule),

@@ -9,10 +9,10 @@ const routes: Routes = [
         path:'',component:LandingComponent
     },
     {
-        path:'/sign-up',component:SignUpComponent
+        path:'sign-up',component:SignUpComponent
     },
     {
-        path:'/sign-in',component:SignInComponent
+        path:'sign-in',component:SignInComponent
     },
 
 ];
