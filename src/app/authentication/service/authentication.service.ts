@@ -7,32 +7,101 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root',
 })
 export class AuthenticationService {
-    constructor(private http:HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-    createUser(body:any):Observable<any>{
-        return this.http.post(`${environment.Main_Api}user`,body)
-    }
 
-    login(body:any):Observable<any>{
-        return this.http.post(`${environment.Main_Api}user/login`,body)
-    }
 
-    isAuthenticated(){
-        if(sessionStorage.getItem('access_token') != undefined){
+    isAuthenticated() {
+        if (sessionStorage.getItem('access_token') != undefined) {
             // let validateToken = 
             return true
         }
-        else if(localStorage.getItem('access_token') != undefined){
+        else if (localStorage.getItem('access_token') != undefined) {
             return true
         }
-        else{
+        else {
             return false
         }
     }
 
-    logOut(){
+    logOut() {
         sessionStorage.clear();
         localStorage.clear();
+    }
+
+    public getJSON(): Observable<any> {
+        return this.http.get("assets/data.json");
+    }
+
+    updateUser(data: any) {
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                value[i] = data
+            }
+        }
+
+        sessionStorage.setItem("user", JSON.stringify(value))
+        return { error: false }
+    }
+
+    setUser(data: any) {
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                return { error: true }
+            }
+        }
+
+        value.push(data)
+        sessionStorage.setItem("user", JSON.stringify(value))
+        return { error: false }
+    }
+
+    deleteUser(data: any) {
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                value.splice(i, 1)
+                sessionStorage.setItem("user", JSON.stringify(value))
+                return { error: false }
+            }
+        }
+        return { error: true }
+    }
+
+    returnUser(data: any) {
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email ) {
+                return value[i]
+            }
+        }
+        return { error: true }
+    }
+
+    check(data: any) {
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email && data.password == value[i].password) {
+                return value[i]
+            }
+        }
+        return { error: true }
+    }
+
+    getAllUser(){
+        let temp: any = sessionStorage.getItem("user")
+        let value = JSON.parse(temp)
+        return value
     }
 
 }

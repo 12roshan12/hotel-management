@@ -8,7 +8,7 @@
                 <img src="assets/images/patient.svg" class="w-6 h-6" />
             </div>
             <div>
-                Sammie
+                {{'sammie' | uppercase}}
             </div>
         </div>
 
@@ -16,7 +16,7 @@
             <img src="assets/images/logo.png" class="w-30 h-10" />
         </div>
 
-        <div class="flex flex-row gap-x-2 cursor-pointer">
+        <div class="flex flex-row gap-x-2 cursor-pointer" routerLink="/main/account-management">
             <mat-icon>backspace</mat-icon><span>Back</span>
         </div>
     </div>
@@ -31,8 +31,8 @@
                 <div class="bg-white py-4 px-8">
                     <div class="w-full p-2 border border-black/20 rounded flex flex-row gap-x-2">
                         <div class="w-full">
-                            <input type="text" class="w-full"
-                                placeholder="Search by name, role , ID or any related keyword " />
+                            <input type="text" class="w-full px-6 py-2" (keyup)="sortData($event)"
+                                placeholder="Search by email " />
                         </div>
                         <div>
                             <button>Filter</button>
@@ -54,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }" class="border-b-2 border-gray-200 ">
+                                <tr *ngFor="let item of filteredUser | paginate: { itemsPerPage: 10, currentPage: p }" class="border-b-2 border-gray-200 ">
                                     <td class="p-2 text-start">
                                         <input type="checkbox" />
                                     </td>
@@ -62,20 +62,20 @@
                                         <span class="flex flex-row items-center justify-start gap-x-2">
                                             <span><img src="assets/images/profile.png" class="w-8 h-8" /> </span>
                                             <span class="flex flex-col gap-1">
-                                                <span>Birendra</span>
-                                                <span class="text-xs text-gray-500">Birendra1@gmail.com</span>
+                                                <span>{{item?.firstName | titlecase}}</span>
+                                                <span class="text-xs text-gray-500">{{item?.email | titlecase}}</span>
                                             </span>
                                         </span>
                                     </td>
                                     <td class="p-2 text-start">
                                         <span class="p-1 rounded-full bg-gray-200">
-                                            #1234ksmjn
+                                            #{{item?.id | titlecase}}
                                         </span>
                                     </td>
                                     <td class="p-2 text-start">
                                         <span class="flex flex-col gap-1">
-                                            <span>Doctor</span>
-                                            <span class="text-xs text-gray-500 italic">Full Time</span>
+                                            <span>{{item?.designation | titlecase}}</span>
+                                            <span class="text-xs text-gray-500 italic">{{item?.dutyType | titlecase}}</span>
                                         </span>
                                     </td>
 
@@ -89,14 +89,14 @@
 
                                     <td class="p-2 text-start">
                                         <span class="p-1 rounded-full bg-gray-200">
-                                            Sub Admin
+                                            {{item?.role | titlecase}}
                                         </span>
                                     </td>
 
                                     <td class="p-2 text-start">
                                         <span
                                             class="p-1 rounded-full bg-red-200 flex flex-row gap-2 items-center w-[70px] px-2">
-                                            <span class=" text-red-700">Ward A</span>
+                                            <span class=" text-red-700">Ward  {{item?.ward | titlecase}}</span>
                                         </span>
                                     </td>
 

@@ -8,7 +8,7 @@
                 <img src="assets/images/patient.svg" class="w-6 h-6" />
             </div>
             <div>
-                Sammie
+                {{'sammie' | uppercase}}
             </div>
         </div>
 
@@ -16,7 +16,7 @@
             <img src="assets/images/logo.png" class="w-30 h-10" />
         </div>
 
-        <div class="flex flex-row gap-x-2 cursor-pointer">
+        <div class="flex flex-row gap-x-2 cursor-pointer" routerLink="/main/account-management">
             <mat-icon>backspace</mat-icon><span>Back</span>
         </div>
     </div>
@@ -26,43 +26,48 @@
             Account Management
         </div>
 
-        <div class=" h-[60vh] w-full flex items-center justify-center">
+        <div class=" h-[60vh] w-full flex items-center justify-center" [formGroup]="deleteForm">
             <div class="bg-white h-[50vh] w-[40vw] ">
-              <div  *ngIf="!dataSubmitted" >
-                <div class="p-8 flex flex-col gap-y-16 w-full">
-                    <div class="text-lg font-semibold">Delete Existing User</div>
-                    <div class="flex flex-col gap-y-2 w-full">
-                        <div>Search</div>
-                        <div class="w-full"><input class="bg-transparent border-b border-black w-full h-[30px]"
-                            placeholder="Enter username or email address"/> </div>
+                <div *ngIf="!dataSubmitted">
+                    <div class="p-8 flex flex-col gap-y-16 w-full">
+                        <div class="text-lg font-semibold">Delete Existing User</div>
+                        <div class="flex flex-col gap-y-2 w-full">
+                            <div>Email</div>
+                            <div class="w-full"><input
+                                    [ngClass]="deleteForm.get('email')?.invalid && deleteForm.get('email')?.touched ? 'border-b border-red-600' : 'border-b border-black/50' "
+                                    class="bg-transparent border-b border-black w-full h-[30px]"
+                                    placeholder="Enter your email address" formControlName="email" />
+                                <span *ngIf="deleteForm.get('email')?.invalid && deleteForm.get('email')?.touched"
+                                    class="text-xs text-red-600 pl-4">Email is required</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#867AAB] w-auto text-white" (click)="signUp()" >
+                            <span>Submit</span>
+                            <span>
+                                <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.775391 10H24.4489" stroke="white" stroke-width="3" />
+                                    <path d="M16.459 1.41833L25.0406 9.99997L16.459 18.5816" stroke="white"
+                                        stroke-width="3" />
+                                </svg>
+
+                            </span>
+                        </button>
+
                     </div>
                 </div>
-
-                <div class="p-8">
-                    <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#867AAB] w-auto text-white">
-                        <span>Submit</span>
-                        <span>
-                            <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.775391 10H24.4489" stroke="white" stroke-width="3" />
-                                <path d="M16.459 1.41833L25.0406 9.99997L16.459 18.5816" stroke="white"
-                                    stroke-width="3" />
-                            </svg>
-
-                        </span>
-                    </button>
-
-                </div>
-              </div>
 
                 <div *ngIf="dataSubmitted" class="flex justify-center items-center w-full h-full">
                     <div class="flex flex-row gap-x-6 p-2 bg-[#95EEC4]/60 items-center">
-                        <span><img src="assets/images/info.svg" ></span>
-                        <span>User have been Deleted Successfully </span>
+                        <span><img src="assets/images/info.svg"></span>
+                        <span>User deleted Successfully </span>
                     </div>
                 </div>
             </div>
-           
+
         </div>
 
     </div>

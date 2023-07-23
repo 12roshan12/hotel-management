@@ -1,4 +1,4 @@
-<div class=" relative w-[100vw] h-[100vh] overflow-auto">
+<div class=" relative w-[100vw] min-h-[100vh] overflow-clip">
     <div class="pl-40">
         <img src="assets/images/bannerDoctor.png" class="w-6/12 h-[95vh] object-fill " />
     </div>
@@ -8,7 +8,7 @@
     <div class="w-full bg-[#3EB489] h-[5vh]">
     </div>
 
-    <div class="absolute top-0 left-0 w-[100vw] h-[100vh]" style="z-index: 9999 !important;">
+    <div class="absolute top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto overflow-x-clip" style="z-index: 9999 !important;">
         <router-outlet></router-outlet>
     </div>
 

@@ -4,10 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CurrentUserPipe } from './currentUser.pipe';
 
 
 @NgModule({
   declarations: [
+    CurrentUserPipe
   ],
   imports: [
     ToastrModule.forRoot()
@@ -15,7 +18,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
   exports: [
     ToastrModule,
     MatIconModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CurrentUserPipe
   ],
 })
 export class SharedModule { }

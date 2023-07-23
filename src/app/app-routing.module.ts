@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './authentication/service/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'main', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule),
+    path: 'main', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
   },
   {
     path: 'authentication', loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)

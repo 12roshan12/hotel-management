@@ -12,7 +12,7 @@
         </div>
     </div>
 </div>
-<div class="w-full h-full p-16 m-auto ">
+<div class="w-full h-full p-16 m-auto px-32" [formGroup]="signUpForm">
 
     <div class="flex py-4">
         <div class="bg-[#008592] text-white px-4 py-2">Please Sign Up to continue</div>
@@ -21,53 +21,100 @@
     <div class="grid grid-cols-2 gap-4 ">
         <div class="flex flex-col gap-2">
             <label>First Name</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name"
+                formControlName="firstName"
+                [ngClass]="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('firstName')?.invalid && signUpForm.get('firstName')?.touched"
+                class="text-xs text-red-600 pl-4">First Name is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>Last Name</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Last Name"
+                formControlName="lastName"
+                [ngClass]="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('lastName')?.invalid && signUpForm.get('lastName')?.touched"
+                class="text-xs text-red-600 pl-4">Last Name is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>Email</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Email"
+                formControlName="email"
+                [ngClass]="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched"
+                class="text-xs text-red-600 pl-4">Email is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>Mobile Number</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="number" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Mobile Number"
+                formControlName="mobileNumber"
+                [ngClass]="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('mobileNumber')?.invalid && signUpForm.get('mobileNumber')?.touched"
+                class="text-xs text-red-600 pl-4">Mobile Number is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>Date Of Birth</label>
-            <input type="date" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="date" class="w-full border border-gray-200 rounded-lg p-2" placeholder="" formControlName="dob"
+                [ngClass]="signUpForm.get('dob')?.invalid && signUpForm.get('dob')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('dob')?.invalid && signUpForm.get('dob')?.touched"
+                class="text-xs text-red-600 pl-4">Birth Date is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>ID Number</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Id Number"
+                formControlName="id"
+                [ngClass]="signUpForm.get('id')?.invalid && signUpForm.get('id')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('id')?.invalid && signUpForm.get('id')?.touched"
+                class="text-xs text-red-600 pl-4">Id is required</span>
         </div>
     </div>
     <div class="w-full grid grid-cols-3 gap-4">
         <div class="flex flex-col gap-2">
             <label>Gender</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <select class="w-full border border-gray-200 rounded-lg p-2" placeholder="" formControlName="gender"
+                [ngClass]="signUpForm.get('gender')?.invalid && signUpForm.get('gender')?.touched ? 'border border-red-600' : 'border border-black/50' ">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Others</option>
+            </select>
+
+            <span *ngIf="signUpForm.get('gender')?.invalid && signUpForm.get('gender')?.touched"
+                class="text-xs text-red-600 pl-4">Gender is required</span>
         </div>
+
+
 
         <div class="flex flex-col gap-2">
             <label>Password</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="password" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Password"
+                formControlName="password"
+                [ngClass]="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched"
+                class="text-xs text-red-600 pl-4">Password is required</span>
         </div>
 
         <div class="flex flex-col gap-2">
             <label>Confirm Password</label>
-            <input type="text" class="w-full border border-gray-200 rounded-lg p-2" placeholder="First Name" />
+            <input type="password" class="w-full border border-gray-200 rounded-lg p-2" placeholder="Confirm Password"
+                formControlName="confirmPassword"
+                [ngClass]="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched ? 'border border-red-600' : 'border border-black/50' " />
+            <span *ngIf="signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched"
+                class="text-xs text-red-600 pl-4">Invalid Password</span>
         </div>
     </div>
 
     <div class="flex justify-center items-center pt-9">
-        <button class="px-5 py-3 rounded-full w-[200px] text-white bg-[#867AAB] " (click)="signin()" >Sign Up</button>
+        <button class="px-5 py-3 rounded-full w-[200px] text-white bg-[#867AAB] " (click)="signin()">Sign Up</button>
+    </div>
+
+    <div class="flex justify-center items-center pt-4  flex-col">
+        Already have account?
+        <button class="px-4 py-2 rounded-full w-[200px] text-white bg-[#008592] "
+            routerLink="/authentication/sign-in">Sign In</button>
     </div>
 
 </div>
