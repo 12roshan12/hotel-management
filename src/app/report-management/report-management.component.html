@@ -16,7 +16,7 @@
             <img src="assets/images/logo.png" class="w-30 h-10" />
         </div>
 
-        <div class="flex flex-row gap-x-2 cursor-pointer">
+        <div class="flex flex-row gap-x-2 cursor-pointer" routerLink="/main">
             <mat-icon>backspace</mat-icon><span>Back</span>
         </div>
     </div>
@@ -47,8 +47,8 @@
                 <div *ngIf="!composeMessage && !PreviewMessage" class="bg-white py-4 px-8">
                     <div class="w-full p-2 border border-black/20 rounded flex flex-row gap-x-2">
                         <div class="w-full">
-                            <input type="text" class="w-full"
-                                placeholder="Search by name, role , ID or any related keyword " />
+                            <input type="text" class="w-full" (keyup)="sortData($event)"
+                                placeholder="Search by email " />
                         </div>
                         <div>
                             <button>Filter</button>
@@ -63,14 +63,15 @@
                                     <th class="p-2 text-start">Name</th>
                                     <th class="p-2 text-start">Date</th>
                                     <th class="p-2 text-start">Subject</th>
+                                    <th class="p-2 text-start">From/To</th>
                                     <th class="p-2 text-start">Status</th>
                                     <th class="p-2 text-start">Action Taken</th>
                                     <th class="p-2 text-start">Ward</th>
-                                    <th class="p-2">Action</th>
+                                    <th class="p-2">Message Preview</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }"
+                                <tr *ngFor="let item of filteredMessageList | paginate: { itemsPerPage: 10, currentPage: p }"
                                     class="border-b-2 border-gray-200 ">
                                     <td class="p-2 text-start">
                                         <input type="checkbox" />
@@ -79,19 +80,26 @@
                                         <span class="flex flex-row items-center justify-start gap-x-2">
                                             <span><img src="assets/images/profile.png" class="w-8 h-8" /> </span>
                                             <span class="flex flex-col gap-1">
-                                                <span>Birendra</span>
-                                                <span class="text-xs text-gray-500">Birendra1@gmail.com</span>
+                                                <span>{{item?.firstName}}</span>
+                                                <span class="text-xs text-gray-500">{{item?.email}}</span>
                                             </span>
                                         </span>
                                     </td>
                                     <td class="p-2 text-start">
-                                        <span class="p-1 rounded-full bg-gray-200">
-                                            7/18/2023
+                                        <span class="p-1 px-2 rounded-full bg-gray-200">
+                                            {{item?.date}}
                                         </span>
                                     </td>
                                     <td class="p-2 text-start">
                                         <span class="flex flex-col gap-1">
-                                            <span>Important Matter</span>
+                                            <span>{{item?.subject}}</span>
+                                        </span>
+                                    </td>
+
+                                    <td class="p-2 text-start">
+                                        <span class="flex flex-col gap-1">
+                                            <span>{{item?.email == item.from ? item?.to :
+                                                item?.from }}</span>
                                         </span>
                                     </td>
 
@@ -99,26 +107,28 @@
                                         <span
                                             class="p-1 rounded-full bg-green-200 flex flex-row gap-2 items-center w-[80px] px-2">
                                             <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                            <span class=" text-green-700">Read</span>
+                                            <span class=" text-green-700">{{item?.email == item.from ? 'Sent' :
+                                                'Reveived' }}</span>
                                         </span>
                                     </td>
 
                                     <td class="p-2 text-start">
                                         <span class="p-1 rounded-full bg-gray-200">
-                                            Pending
+                                            {{item?.email == item.from ? 'Delivered' :
+                                            'Reveived' }}
                                         </span>
                                     </td>
 
                                     <td class="p-2 text-start">
                                         <span
                                             class="p-1 rounded-full bg-red-200 flex flex-row gap-2 items-center w-[70px] px-2">
-                                            <span class=" text-red-700">Ward A</span>
+                                            <span class=" text-red-700">Ward {{item?.ward}}</span>
                                         </span>
                                     </td>
 
                                     <td class="p-2 ">
-                                        <span class="flex justify-center">
-                                            <img src="assets/images/3dot.svg" />
+                                        <span class="flex justify-center" (click)="displaymessage(item)">
+                                            <mat-icon>remove_red_eye</mat-icon>
                                         </span>
 
                                     </td>
@@ -143,12 +153,12 @@
 
                 </div>
 
-                <div *ngIf="composeMessage && !PreviewMessage" class=" min-h-[60vh] w-full flex items-center justify-center">
+                <div *ngIf="composeMessage && !PreviewMessage"
+                    class=" min-h-[60vh] w-full flex items-center justify-center">
                     <div class="bg-white min-h-[50vh] w-[40vw] ">
                         <div *ngIf="!dataSubmitted ">
                             <div class="p-8 flex flex-col gap-y-2 w-full">
-                                <div
-                                    class="text-lg p-4 bg-[#867AAB] text-white flex flex-row justify-between w-full">
+                                <div class="text-lg p-4 bg-[#867AAB] text-white flex flex-row justify-between w-full">
                                     <span> New Message </span>
                                     <span> Actions </span>
                                 </div>
@@ -161,27 +171,30 @@
                                             CC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BCC
                                         </span>
                                     </div>
-                                    <div class="w-full"><input
-                                            class="bg-transparent border-b border-black w-full h-[30px]"
-                                            placeholder="User" /> </div>
+                                    <div class="w-full">
+                                        <ng-select [(ngModel)]="selectedUser" [multiple]="true">
+                                            <ng-option *ngFor="let car of userList"
+                                                [value]="car.email">{{car.email}}</ng-option>
+                                        </ng-select>
+                                    </div>
                                 </div>
                                 <div class="flex flex-col gap-y-2 w-full">
                                     <div>Subject</div>
-                                    <div class="w-full"><input
-                                            class="bg-transparent border-b border-black w-full h-[30px]"
+                                    <div class="w-full"><input [(ngModel)]="subject"
+                                            class="bg-transparent border-b border-black w-full h-[30px] px-4"
                                             placeholder="Subject" /> </div>
                                 </div>
                                 <div class="flex flex-col gap-y-2 w-full">
                                     <div>Message</div>
-                                    <div class="w-full"><input
-                                            class="bg-transparent  w-full h-[30px]"
-                                            placeholder="Message" /> </div>
+                                    <div class="w-full"><input [(ngModel)]="message"
+                                            class="bg-transparent  w-full h-[30px] px-4" placeholder="Message" /> </div>
                                 </div>
                             </div>
 
                             <div class="p-8 flex flex-row justify-between">
                                 <div>
-                                    <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#008592] w-auto text-white">
+                                    <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#008592] w-auto text-white"
+                                        (click)="sendMessage()">
                                         <span>Send</span>
                                         <span>
                                             <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
@@ -190,29 +203,26 @@
                                                 <path d="M16.459 1.41833L25.0406 9.99997L16.459 18.5816" stroke="white"
                                                     stroke-width="3" />
                                             </svg>
-    
+
                                         </span>
                                     </button>
+
                                 </div>
-                                <div>
+                                <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2" (click)="back()" >Back</button>
+
+                                <!-- <div>
                                     Actions
-                                </div>
-                          
+                                </div> -->
 
-                            </div>
-                        </div>
 
-                        <div *ngIf="dataSubmitted" class="flex justify-center items-center w-full h-full">
-                            <div class="flex flex-row gap-x-6 p-2 bg-[#95EEC4]/60 items-center">
-                                <span><img src="assets/images/info.svg"></span>
-                                <span>Sent Succesfully</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <div *ngIf="PreviewMessage && !composeMessage" class=" min-h-[60vh] w-full flex items-center justify-center">
+                <div *ngIf="PreviewMessage && !composeMessage"
+                    class=" min-h-[60vh] w-full flex items-center justify-center">
                     <div class="bg-white min-h-[50vh] w-[40vw] rounded-lg">
                         <div *ngIf="!dataSubmitted " class="p-8">
                             <div class=" flex flex-row justify-end gap-2 w-full border-b border-b-gray-200 py-2">
@@ -224,28 +234,35 @@
                                 </span>
                             </div>
                             <div class="text-lg pt-4">
-                                Board Meeting Minutes
+                                {{selectedMessage.subject}}
                             </div>
                             <div class="pt-4">
                                 <span class="flex flex-row items-center justify-start gap-x-2">
                                     <span><img src="assets/images/profile.png" class="w-8 h-8" /> </span>
                                     <span class="flex flex-col">
                                         <span class="flex flex-row items-center gap-1">
-                                            <span>Birendra</span>
-                                            <span class="text-xs text-gray-500">< Birendra1@gmail.com ></span>
+                                            <!-- <span>Birendra</span> -->
+                                            <span class="text-xs text-gray-500">
+                                                <{{selectedMessage?.email==selectedMessage.from ? selectedMessage?.to
+                                                    :selectedMessage?.from }}>
+                                            </span>
                                         </span>
-                                        <span class="text-xs text-gray-500">to me , pat</span>
+                                        <span class="text-xs text-gray-500">{{selectedMessage?.email ==
+                                            selectedMessage.from ? "From" :"To" }} {{selectedMessage.email}} </span>
                                     </span>
-                               
+
                                 </span>
                             </div>
                             <div class="pt-4">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis obcaecati ipsum optio hic ut reiciendis provident dolorum, blanditiis cum nemo, ad dolores alias qui placeat! Soluta perspiciatis voluptates error doloribus.
+                                {{selectedMessage?.message}}
                             </div>
-                            <div class="pt-4 flex flex-row justify-center gap-x-4">
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Reply</button>
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Reply All</button>
-                                    <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Forward</button>
+                            <div class="pt-4 flex flex-row justify-center gap-x-4"
+                                *ngIf="selectedMessage?.email == selectedMessage.to">
+                                <button
+                                    class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2" (click)="reply()" >Reply</button>
+                                <button class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2" (click)="back()" >Back</button>
+                                <!-- <button
+                                    class="border border-gray-200 text-blue rounded text-blue-600 px-4 py-2">Forward</button> -->
                             </div>
                         </div>
                     </div>

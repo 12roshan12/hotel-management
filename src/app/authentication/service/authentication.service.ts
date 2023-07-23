@@ -104,4 +104,19 @@ export class AuthenticationService {
         return value
     }
 
+    getAllMessage(){
+        let temp: any = sessionStorage.getItem("message")
+        let value = JSON.parse(temp)
+        return value
+    }
+
+    saveMessage(data: any) {
+        let temp: any = sessionStorage.getItem("message")
+        let value = JSON.parse(temp)
+        value.push(...data)
+
+        sessionStorage.setItem("message", JSON.stringify(value))
+        return { error: false }
+    }
+
 }

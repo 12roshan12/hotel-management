@@ -6,6 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrentUserPipe } from './currentUser.pipe';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CurrentUserPipe } from './currentUser.pipe';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-    CurrentUserPipe
+    CurrentUserPipe,
+    NgSelectModule
   ],
 })
 export class SharedModule { }
