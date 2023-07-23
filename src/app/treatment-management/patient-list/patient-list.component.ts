@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/authentication/service/authentication.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -6,14 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
-  collection: any[] = []
+  patientList: any[] = []
+  filterPatients: any[] = []
   p = 1
+
+  constructor(private service:AuthenticationService)
+  {
+
+  }
   
   ngOnInit(): void {
+    this.patientList = this.service.getAllpatients()
+    this.filterPatients = this.patientList
+  }
 
-    for (let i = 1; i <= 100; i++) {
-      this.collection.push(`item ${i}`);
+  sortData(e: any) {
+    if (e.target.value.length == 0 && e.target.value == '') {
+      this.filterPatients = this.patientList
+      return
     }
+    let temp = e.target.value ? e.target.value : e
+    this.filterPatients = this.patientList.filter((dat: any) => {
+      return dat[`email`]?.toString().toLowerCase().startsWith(temp?.toString().toLowerCase())
+    })
   }
 
 }

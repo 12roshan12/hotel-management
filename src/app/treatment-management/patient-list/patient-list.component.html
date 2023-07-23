@@ -61,8 +61,8 @@
                 <div class="bg-white py-4 px-8">
                     <div class="w-full p-2 border border-black/20 rounded flex flex-row gap-x-2">
                         <div class="w-full">
-                            <input type="text" class="w-full"
-                                placeholder="Search by name, role , ID or any related keyword " />
+                            <input type="text" class="w-full px-4 py-1" (keyup)="sortData($event)"
+                                placeholder="Search by email" />
                         </div>
                         <div>
                             <button>Filter</button>
@@ -75,16 +75,15 @@
                                 <tr>
                                     <th class="p-2 text-start"><input type="checkbox" /> </th>
                                     <th class="p-2 text-start">Name</th>
-                                    <th class="p-2 text-start">Employee ID</th>
-                                    <th class="p-2 text-start">Designation</th>
-                                    <th class="p-2 text-start">Status</th>
-                                    <th class="p-2 text-start">System Role</th>
+                                    <th class="p-2 text-start">Date Admitted</th>
+                                    <th class="p-2 text-start">Bed No.</th>
+                                    <th class="p-2 text-start">Patient Status</th>
                                     <th class="p-2 text-start">Ward</th>
                                     <th class="p-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p }"
+                                <tr *ngFor="let item of filterPatients | paginate: { itemsPerPage: 10, currentPage: p }"
                                     class="border-b-2 border-gray-200 ">
                                     <td class="p-2 text-start">
                                         <input type="checkbox" />
@@ -93,41 +92,32 @@
                                         <span class="flex flex-row items-center justify-start gap-x-2">
                                             <span><img src="assets/images/profile.png" class="w-8 h-8" /> </span>
                                             <span class="flex flex-col gap-1">
-                                                <span>Birendra</span>
-                                                <span class="text-xs text-gray-500">Birendra1@gmail.com</span>
+                                                <span>{{item?.firstname}} {{item?.lastname}}</span>
+                                                <span class="text-xs text-gray-500">{{item?.email}}</span>
                                             </span>
                                         </span>
                                     </td>
                                     <td class="p-2 text-start">
-                                        <span class="p-1 rounded-full bg-gray-200">
-                                            #1234ksmjn
+                                        <span class="p-1 rounded-full bg-gray-200 px-2 py-1">
+                                            {{item?.admission_date}}
                                         </span>
                                     </td>
+                                 
                                     <td class="p-2 text-start">
-                                        <span class="flex flex-col gap-1">
-                                            <span>Doctor</span>
-                                            <span class="text-xs text-gray-500 italic">Full Time</span>
-                                        </span>
-                                    </td>
-
-                                    <td class="p-2 text-start">
-                                        <span
-                                            class="p-1 rounded-full bg-green-200 flex flex-row gap-2 items-center w-[80px] px-2">
-                                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                            <span class=" text-green-700">Active</span>
+                                        <span class="p-1 rounded-full bg-gray-200 px-2 py-1">
+                                            {{item?.bed_number}}
                                         </span>
                                     </td>
 
                                     <td class="p-2 text-start">
-                                        <span class="p-1 rounded-full bg-gray-200">
-                                            Sub Admin
+                                        <span class="p-1 rounded-full bg-gray-200 px-2 py-1">
+                                            {{item?.patient_status | titlecase}}
                                         </span>
                                     </td>
 
                                     <td class="p-2 text-start">
-                                        <span
-                                            class="p-1 rounded-full bg-red-200 flex flex-row gap-2 items-center w-[70px] px-2">
-                                            <span class=" text-red-700">Ward A</span>
+                                        <span class="p-1 rounded-full bg-gray-200 px-2 py-1">
+                                           Ward {{item?.ward | titlecase}}
                                         </span>
                                     </td>
 

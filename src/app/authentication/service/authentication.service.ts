@@ -119,4 +119,76 @@ export class AuthenticationService {
         return { error: false }
     }
 
+
+    updatepatients(data: any) {
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                value[i] = data
+            }
+        }
+
+        sessionStorage.setItem("patients", JSON.stringify(value))
+        return { error: false }
+    }
+
+    setpatients(data: any) {
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                return { error: true }
+            }
+        }
+
+        value.push(data)
+        sessionStorage.setItem("patients", JSON.stringify(value))
+        return { error: false }
+    }
+
+    deletepatients(data: any) {
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email) {
+                value.splice(i, 1)
+                sessionStorage.setItem("patients", JSON.stringify(value))
+                return { error: false }
+            }
+        }
+        return { error: true }
+    }
+
+    returnpatients(data: any) {
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email ) {
+                return value[i]
+            }
+        }
+        return { error: true }
+    }
+
+    checkPateients(data: any) {
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+        for (let i = 0; i < value.length; i++) {
+            if (data.email == value[i].email && data.password == value[i].password) {
+                return value[i]
+            }
+        }
+        return { error: true }
+    }
+
+    getAllpatients(){
+        let temp: any = sessionStorage.getItem("patients")
+        let value = JSON.parse(temp)
+        return value
+    }
+
 }

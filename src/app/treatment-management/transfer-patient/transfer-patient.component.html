@@ -26,49 +26,62 @@
             Patient Profile
         </div>
 
-        <div class=" h-[60vh] w-full flex items-center justify-center">
-            <div class="bg-white h-[50vh] w-[40vw] ">
-              <div  *ngIf="!dataSubmitted" >
-                <div class="p-8 flex flex-col gap-y-8 w-full">
-                    <div class="text-lg font-semibold">Transfer Patient</div>
-                    <div class="flex flex-col w-full">
-                        <div>Patient name</div>
-                        <div class="w-full"><input class="bg-transparent border-b border-black w-full h-[30px]"
-                                placeholder="Patient name" /> </div>
+        <div class=" h-[60vh] w-full flex items-center justify-center" [formGroup]="signUpForm">
+            <div class="bg-white min-h-[50vh] min-w-[40vw] ">
+                <div>
+                    <div class="p-8 flex flex-col gap-y-8 w-full">
+                        <div class="text-lg font-semibold">Transfer Patient</div>
+                        <div class="flex flex-col w-full">
+                            <div>Patient email</div>
+                            <div class="w-full"><input
+                                    class="bg-transparent border-b border-black w-full h-[30px] px-4 py-1"
+                                    placeholder="Patient email" formControlName="email" /> </div>
+                        </div>
+
+                        <div *ngIf="dataSubmitted" class="flex flex-col w-full">
+                            <div class="flex flex-col gap-2">
+                                <label>Ward</label>
+                                <select class="w-full border border-black rounded-lg p-2" placeholder=""
+                                    formControlName="ward"
+                                    [ngClass]="signUpForm.get('ward')?.invalid && signUpForm.get('ward')?.touched ? 'border border-red-600' : 'border border-black/50' ">
+                                    <option value="a">Ward A</option>
+                                    <option value="b">Ward B</option>
+                                    <option value="c">Ward C</option>
+                                    <option value="d">Ward D</option>
+                                    <option value="e">Ward E</option>
+                                </select>
+
+                                <span *ngIf="signUpForm.get('ward')?.invalid && signUpForm.get('ward')?.touched"
+                                    class="text-xs text-red-600 pl-4">Ward is required</span>
+                            </div>
+                        </div>
+
+                        <div *ngIf="dataSubmitted" class="flex flex-col w-full">
+                            <div>Bed Number</div>
+                            <div class="w-full"><input class="bg-transparent border-b border-black w-full h-[30px]"
+                                    placeholder="Ward" formControlName="bed_number" /> </div>
+                        </div>
                     </div>
 
-                    <div class="flex flex-col w-full">
-                        <div>Choose Ward</div>
-                        <div class="w-full"><input class="bg-transparent border-b border-black w-full h-[30px]"
-                                placeholder="Ward" /> </div>
-                    </div>
-                </div>
+                    <div class="p-8">
+                        <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#867AAB] w-auto text-white"
+                            (click)=" !dataSubmitted ?  checkUser() : editUser() ">
+                            <span>{{ dataSubmitted ? 'Transfer' : 'Search'}}</span>
+                            <span>
+                                <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.775391 10H24.4489" stroke="white" stroke-width="3" />
+                                    <path d="M16.459 1.41833L25.0406 9.99997L16.459 18.5816" stroke="white"
+                                        stroke-width="3" />
+                                </svg>
 
-                <div class="p-8">
-                    <button class="px-4 py-2 flex flex-row gap-x-4  bg-[#867AAB] w-auto text-white">
-                        <span>Transfer</span>
-                        <span>
-                            <svg width="28" height="20" viewBox="0 0 28 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0.775391 10H24.4489" stroke="white" stroke-width="3" />
-                                <path d="M16.459 1.41833L25.0406 9.99997L16.459 18.5816" stroke="white"
-                                    stroke-width="3" />
-                            </svg>
+                            </span>
+                        </button>
 
-                        </span>
-                    </button>
-
-                </div>
-              </div>
-
-                <div *ngIf="dataSubmitted" class="flex justify-center items-center w-full h-full">
-                    <div class="flex flex-row gap-x-6 p-2 bg-[#95EEC4]/60 items-center">
-                        <span><img src="assets/images/info.svg" ></span>
-                        <span>Patient transferred </span>
                     </div>
                 </div>
             </div>
-           
+
         </div>
 
     </div>
