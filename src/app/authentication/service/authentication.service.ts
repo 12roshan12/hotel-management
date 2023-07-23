@@ -12,11 +12,11 @@ export class AuthenticationService {
 
 
     isAuthenticated() {
-        if (sessionStorage.getItem('access_token') != undefined) {
+        if (sessionStorage.getItem('token') != undefined) {
             // let validateToken = 
             return true
         }
-        else if (localStorage.getItem('access_token') != undefined) {
+        else if (localStorage.getItem('token') != undefined) {
             return true
         }
         else {

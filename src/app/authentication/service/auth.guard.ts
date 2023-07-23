@@ -18,7 +18,7 @@ export class AuthGuard  {
         state: RouterStateSnapshot): boolean | Promise<boolean> {
         var isAuthenticated = this.authService.isAuthenticated();
         if (!isAuthenticated) {
-            this.router.navigate(['main'], { queryParams: { returnUrl: state.url } });
+            this.router.navigate(['/authentication'], { queryParams: { returnUrl: state.url } });
         }
         return isAuthenticated;
     }
