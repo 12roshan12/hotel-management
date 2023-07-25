@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/authentication/service/authentication.service';
+import { ConfirmPasswordValidator } from 'src/app/authentication/service/confirmPassword';
 
 @Component({
   selector: 'app-add-user',
@@ -33,8 +34,12 @@ export class AddUserComponent implements OnInit {
       designation: [''],
       dutyType: [''],
       ward: [''],
-      role: ['']
-    })
+      role: [''],
+    },
+
+      {
+        validator: ConfirmPasswordValidator("password", "confirmPassword")
+      })
   }
 
   signUp() {
@@ -49,7 +54,9 @@ export class AddUserComponent implements OnInit {
       return
     }
     else{
-      this.dataSubmitted = true
+      this.toastr.success('User added succesfully.')
+      this.router.navigate(['/main/account-management'])
+     
     }
   }
 }
